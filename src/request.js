@@ -7,7 +7,7 @@ function Request() {
                 obj.workflow.validate(obj.message);
             }
         },
-        callback = function() {
+        end = function() {
             if(state === 'request') return;
             state = 'idle';
             run();
@@ -24,7 +24,7 @@ function Request() {
         success: function(data) {
             state = 'process';
             obj.workflow.execute(obj.message, data);
-            callback();
+            end();
         },
         error: function(data) {
             state = 'process';
@@ -34,7 +34,7 @@ function Request() {
                 }
             }
             obj.workflow.exception(obj.message, data);
-            callback();
+            end();
         }
     }
 }
