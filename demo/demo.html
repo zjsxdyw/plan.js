@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DEMO</title>
+    <script src="jquery.js"></script>
+    <script src="jquery.mockjax.js"></script>
+    <script src="request.js"></script>
+</head>
+<body>
+<script>
+// mockjax
+$.mockjax({
+    url:  "a",
+    status: 200,
+    responseText: {
+        a: "a"
+    },
+    responseTime: 1000
+});
+$.mockjax({
+    url:  "b",
+    status: 200,
+    responseText: {
+        b: "b"
+    },
+    responseTime: 1000
+});
+$.mockjax({
+    url:  "c",
+    status: 200,
+    responseText: {
+        c: "c"
+    },
+    responseTime: 1000
+});
+</body>
+</html>
