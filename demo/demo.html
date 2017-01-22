@@ -34,5 +34,59 @@ $.mockjax({
     },
     responseTime: 1000
 });
+var workflow = {
+    a: {
+        validate: function(message) {
+            $.ajax({
+                url: 'a',
+                success: request.success,
+                error: request.error
+            });
+        },
+        execute: function(message, output) {
+            console.log('this is execute', message, output);
+            request.plan('I\'m c.', workflow.c, true);
+        },
+        exception: function(message, output) {
+            console.log('this is exception', message, output);
+        }        
+    },
+    b: {
+        ignore: true,
+        validate: function(message) {
+            $.ajax({
+                url: 'b',
+                success: request.success,
+                error: request.error
+            });
+        },
+        execute: function(message, output) {
+            console.log('this is execute', message, output);
+            request.error(output);
+        },
+        exception: function(message, output) {
+            console.log('this is exception', message, output);
+            request.plan('I\'m c too.', workflow.c);
+        }
+    },
+    c: {
+        validate: function(message) {
+            $.ajax({
+                url: 'c',
+                success: request.success,
+                error: request.error
+            });
+        },
+        execute: function(message, output) {
+            console.log('this is execute', message, output);
+        },
+        exception: function(message, output) {
+            console.log('this is exception', message, output);
+        }
+    }
+}
+var request = Request();
+request.plan('I\'m a.', workflow.a);
+request.plan('I\'m b.', workflow.b);
 </body>
 </html>
