@@ -1,4 +1,4 @@
-function Request() {
+function Plan() {
     var queue = [], state = 'idle', obj,
         run = function () {
             if(state === 'idle' && queue.length !== 0) {
